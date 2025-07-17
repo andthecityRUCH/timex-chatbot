@@ -22,20 +22,21 @@ Timex Chatbot is a full-stack AI-powered assistant built to help users with quer
 ## 📁 Project Structure
 
 timex-chatbot/
-├── backend/
-│ ├── server.cjs # Express server logic
-│ ├── listModels.mjs # Optional script to list OpenAI models
-│ ├── .env # API keys and config (not committed)
-│ ├── package.json # Backend dependencies and start script
-│ └── .gitignore # Node modules, .env ignored
+-backend/
+ -server.cjs # Express server logic
+ -listModels.mjs # Optional script to list OpenAI models
+ -.env # API keys and config (not committed)
+ -package.json # Backend dependencies and start script
+ -.gitignore # Node modules, .env ignored
 
 
-├── frontend/
-│ ├── index.html # Chatbot UI
-│ ├── style.css # Stylesheet
-│ └── chatbot.js # Handles chatbot UI and API calls
-│
-└── README.md # Project documentation
+-frontend/
+ -index.html # Chatbot UI
+ -style.css # Stylesheet
+ -chatbot.js # Handles chatbot UI and API calls
+
+
+-README.md # Project documentation
 
 
 
@@ -64,12 +65,17 @@ The backend runs at http://localhost:5000.
 Open frontend/index.html in your browser.
 Make sure chatbot.js is pointing to the correct backend URL (localhost:5000 or your deployed Render URL).
 
+
+
 🌐 Deployment
 Backend: Hosted on Render
 
 Frontend: Can be hosted on Netlify, GitHub Pages, or Render static site
 
 Make sure to update the frontend fetch() URL in chatbot.js to the deployed backend URL.
+
+
+
 
 🧠 Features
 Chat interface that mimics Timex branding
