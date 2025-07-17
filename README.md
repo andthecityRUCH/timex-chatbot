@@ -28,7 +28,8 @@ timex-chatbot/
 │ ├── .env # API keys and config (not committed)
 │ ├── package.json # Backend dependencies and start script
 │ └── .gitignore # Node modules, .env ignored
-│
+
+
 ├── frontend/
 │ ├── index.html # Chatbot UI
 │ ├── style.css # Stylesheet
@@ -43,7 +44,7 @@ timex-chatbot/
 ## 🚀 How to Run Locally
 
 1. Clone the repository
-```bash
+
 git clone https://github.com/andthecityRUCH/timex-chatbot.git
 cd timex-chatbot
 
