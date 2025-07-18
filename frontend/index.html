@@ -177,21 +177,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js" integrity="sha512-gsEItzcNkWxfxHjr4BaEZAd9YuRWYjxnj7c/yukcZ0/nWehUb5TjJNyyv1ApCU2DFH/qgw+stFZHPOKnoQnIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/ScrollTrigger.min.js" integrity="sha512-ko44b+LlYXwGZI6Gey6Tgrhew9JEPdSE6m7FqDyGGPDW+dDOjsCElEtiUIRRtCXRNHwKheBCnHCQSMdUz/pgkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/b90a16c0c9.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
 
 <!-- Chatbot -->
 <div id="chatbot">
-    <div id="chat-header">Timex Assistant</div>
-    <div id="chat-body"></div>
+    <div id="chat-body">
+      <div class="chat-heading">TIMEX</div>
+    </div>
     <input type="text" id="user-input" placeholder="Ask me anything..." />
   </div>
   
   <!-- Chat Toggle Button -->
-<button id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+  <button id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
     💬 Chat with Timex
   </button>
   
   <script src="chatbot.js"></script>
+  </body>
+  </html>
   
-</body>
-</html>
