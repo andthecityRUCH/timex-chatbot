@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbot = document.getElementById('chatbot');
   const chatToggle = document.getElementById('chat-toggle');
 
+  const welcomeBubble = document.createElement('div');
+welcomeBubble.className = 'chat-bubble bot-message';
+welcomeBubble.textContent = "Hello! 👋 I'm your Personal Timex Assistant. How can I help you today?";
+chatBody.appendChild(welcomeBubble);
+
   // Toggle chat visibility
   chatToggle.addEventListener('click', () => {
     chatbot.classList.toggle('visible');
