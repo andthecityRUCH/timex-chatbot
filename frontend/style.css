@@ -515,6 +515,7 @@ html, body {
     border-style: none;
     cursor: pointer;
 }
+/* Chatbot container */
 #chatbot {
     position: fixed;
     bottom: 80px;
@@ -534,9 +535,8 @@ html, body {
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     padding: 8px;
-    box-sizing: border-box; /* Important so padding doesn’t break layout */
+    box-sizing: border-box;
 }
-
 
 #chatbot.visible {
     opacity: 1;
@@ -564,8 +564,6 @@ html, body {
 }
 
 /* Chat bubbles */
-
-/* Chat bubble styles */
 .chat-bubble {
     max-width: 80%;
     margin: 8px 0;
@@ -576,33 +574,31 @@ html, body {
     clear: both;
     font-size: 14px;
     word-wrap: break-word;
-  }
-  
-  /* Make user's message bubble grey */
-  .user-message {
+}
+
+.user-message {
     background-color: #192028;
     color: white;
     align-self: flex-end;
     float: right;
     border-bottom-right-radius: 4px;
-  }
-  
-  /* Bot message light grey */
-  .bot-message {
+}
+
+.bot-message {
     background-color: #f1f0f0;
     align-self: flex-start;
     float: left;
     border-bottom-left-radius: 4px;
-  }
-  
-  /* Typing indicator inside a bot-style bubble */
-  .typing-indicator {
+}
+
+/* Typing indicator */
+.typing-indicator {
     display: flex;
     align-items: center;
     padding: 5px;
-  }
-  
-  .typing-indicator span {
+}
+
+.typing-indicator span {
     display: inline-block;
     background: #888;
     width: 6px;
@@ -610,39 +606,52 @@ html, body {
     border-radius: 50%;
     margin: 0 2px;
     animation: blink 1.5s infinite ease-in-out;
-  }
-  
-  .typing-indicator span:nth-child(2) {
+}
+
+.typing-indicator span:nth-child(2) {
     animation-delay: 0.2s;
-  }
-  
-  .typing-indicator span:nth-child(3) {
+}
+.typing-indicator span:nth-child(3) {
     animation-delay: 0.4s;
-  }
-  
-  @keyframes blink {
+}
+
+@keyframes blink {
     0%, 80%, 100% {
-      opacity: 0;
+        opacity: 0;
     }
     40% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  
-  /* Restore sleek input area */
-  #chat-footer {
+}
+
+/* Fade-in animation for welcome message */
+.fade-in {
+    opacity: 0;
+    animation: fadeInMessage 0.6s ease forwards;
+}
+
+@keyframes fadeInMessage {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Chat footer */
+#chat-footer {
     display: flex;
     align-items: center;
     padding: 8px 10px;
     border-top: 1px solid #ccc;
     background-color: #fff;
-    /*margin-bottom: 8px;  ← This lifts it slightly from the bottom */
-    border-radius: 0 0 12px 12px; /* Optional: gives a nice rounded bottom */
-  }
-  
-  
-  
-  #user-input {
+    border-radius: 0 0 12px 12px;
+}
+
+#user-input {
     flex-grow: 1;
     padding: 8px 12px;
     border: 1px solid #ccc;
@@ -651,12 +660,11 @@ html, body {
     outline: none;
     max-height: 38px;
     height: 38px;
-  }
-  
-  
-  /* Chat toggle button - match Timex branding */
-  #chat-toggle {
-    background-color: #000; /* Black button */
+}
+
+/* Toggle button */
+#chat-toggle {
+    background-color: #000;
     color: white;
     border: none;
     padding: 12px 18px;
@@ -665,19 +673,20 @@ html, body {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: background-color 0.3s ease;
-  }
-  
-  #chat-toggle:hover {
+}
+
+#chat-toggle:hover {
     background-color: #333;
-  }
-  
-  .chat-heading {
+}
+
+.chat-heading {
     font-family: Arial, sans-serif;
     font-weight: bold;
     font-size: 24px;
     text-align: center;
-    color: #000; /* or #1E1E1E if softer */
+    color: #000;
     padding: 4px 0;
     letter-spacing: 1px;
     margin-bottom: 4px;
 }
+

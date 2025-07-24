@@ -4,32 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatbot = document.getElementById('chatbot');
   const chatToggle = document.getElementById('chat-toggle');
 
-  const welcomeBubble = document.createElement('div');
-welcomeBubble.className = 'chat-bubble bot-message';
-welcomeBubble.textContent = "Hello! 👋 I'm your Personal Timex Assistant. How can I help you today?";
-chatBody.appendChild(welcomeBubble);
+  let welcomeShown = false;
 
-  // Toggle chat visibility
+  // Toggle chatbot visibility
   chatToggle.addEventListener('click', () => {
     chatbot.classList.toggle('visible');
-  });
 
-  // Handle user input
-  input.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const message = input.value.trim();
-      if (!message) return;
+    if (chatbot.classList.contains('visible') && !welcomeShown) {
+      welcomeShown = true;
 
-      // Append user bubble
-      const userBubble = document.createElement('div');
-      userBubble.className = 'chat-bubble user-message';
-      userBubble.textContent = message;
-      chatBody.appendChild(userBubble);
-      input.value = '';
-      chatBody.scrollTop = chatBody.scrollHeight;
-
-      // Add bot typing indicator
+      // Add typing indicator
       const typingBubble = document.createElement('div');
       typingBubble.className = 'chat-bubble bot-message';
       typingBubble.innerHTML = `
@@ -40,7 +24,43 @@ chatBody.appendChild(welcomeBubble);
       chatBody.appendChild(typingBubble);
       chatBody.scrollTop = chatBody.scrollHeight;
 
-      // Fetch bot response
+      // After delay, remove typing and show welcome
+      setTimeout(() => {
+        typingBubble.remove();
+
+        const welcomeBubble = document.createElement('div');
+        welcomeBubble.className = 'chat-bubble bot-message fade-in';
+        welcomeBubble.textContent = "Hello! 👋 I'm your Personal Timex Assistant. How can I help you today?";
+        chatBody.appendChild(welcomeBubble);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }, 1200);
+    }
+  });
+
+  // Handle user input
+  input.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      const userBubble = document.createElement('div');
+      userBubble.className = 'chat-bubble user-message';
+      userBubble.textContent = message;
+      chatBody.appendChild(userBubble);
+      input.value = '';
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      const typingBubble = document.createElement('div');
+      typingBubble.className = 'chat-bubble bot-message';
+      typingBubble.innerHTML = `
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+      chatBody.appendChild(typingBubble);
+      chatBody.scrollTop = chatBody.scrollHeight;
+
       fetch('https://timex-chatbot-backend.onrender.com/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
