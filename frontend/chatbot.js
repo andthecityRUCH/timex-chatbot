@@ -6,6 +6,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let welcomeShown = false;
 
+  // Function to create a chat bubble
+  function createBubble(message, className) {
+    const bubble = document.createElement('div');
+    bubble.className = `chat-bubble ${className}`;
+    bubble.innerHTML = marked.parse(message);
+    chatBody.appendChild(bubble);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return bubble;
+  }
+
+  // Function to show quick reply buttons
+  function showQuickReplies(replies) {
+    const container = document.createElement('div');
+    container.className = 'quick-replies';
+
+    replies.forEach(reply => {
+      const button = document.createElement('button');
+      button.className = 'quick-reply';
+      button.textContent = reply;
+      button.addEventListener('click', () => {
+        input.value = reply;
+        input.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
+        container.remove(); // Remove buttons after click
+      });
+      container.appendChild(button);
+    });
+
+    chatBody.appendChild(container);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
   // Toggle chatbot visibility
   chatToggle.addEventListener('click', () => {
     chatbot.classList.toggle('visible');
@@ -13,9 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chatbot.classList.contains('visible') && !welcomeShown) {
       welcomeShown = true;
 
-      // Add typing indicator
       const typingBubble = document.createElement('div');
-      typingBubble.className = 'chat-bubble bot-message';
+      typingBubble.className = 'chat-bubble bot-message'; 
       typingBubble.innerHTML = `
         <div class="typing-indicator">
           <span></span><span></span><span></span>
@@ -24,15 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chatBody.appendChild(typingBubble);
       chatBody.scrollTop = chatBody.scrollHeight;
 
-      // After delay, remove typing and show welcome
       setTimeout(() => {
         typingBubble.remove();
-
-        const welcomeBubble = document.createElement('div');
-        welcomeBubble.className = 'chat-bubble bot-message fade-in';
-        welcomeBubble.textContent = "Hello! 👋 I'm your Personal Timex Assistant. How can I help you today?";
-        chatBody.appendChild(welcomeBubble);
-        chatBody.scrollTop = chatBody.scrollHeight;
+        createBubble("Hello! 👋 I'm your Personal Timex Assistant. How can I help you today?", 'bot-message fade-in');
       }, 1200);
     }
   });
@@ -44,12 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = input.value.trim();
       if (!message) return;
 
-      const userBubble = document.createElement('div');
-      userBubble.className = 'chat-bubble user-message';
-      userBubble.textContent = message;
-      chatBody.appendChild(userBubble);
+      createBubble(message, 'user-message');
       input.value = '';
-      chatBody.scrollTop = chatBody.scrollHeight;
 
       const typingBubble = document.createElement('div');
       typingBubble.className = 'chat-bubble bot-message';
@@ -68,21 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(res => res.json())
       .then(data => {
-        let reply = data.reply.replace(/\*/g, '');
         typingBubble.remove();
+        createBubble(data.reply.replace(/\*/g, ''), 'bot-message');
 
-        const botBubble = document.createElement('div');
-        botBubble.className = 'chat-bubble bot-message';
-        botBubble.innerHTML = marked.parse(reply);
-        chatBody.appendChild(botBubble);
-        chatBody.scrollTop = chatBody.scrollHeight;
+        if (Array.isArray(data.quickReplies) && data.quickReplies.length > 0) {
+          showQuickReplies(data.quickReplies);
+        }
       })
       .catch(() => {
         typingBubble.remove();
-        const errorBubble = document.createElement('div');
-        errorBubble.className = 'chat-bubble bot-message';
-        errorBubble.textContent = 'Sorry, something went wrong.';
-        chatBody.appendChild(errorBubble);
+        createBubble('Sorry, something went wrong.', 'bot-message');
       });
     }
   });

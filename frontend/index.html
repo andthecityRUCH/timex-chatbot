@@ -187,7 +187,13 @@
     </div>
     <input type="text" id="user-input" placeholder="Ask me anything..." />
   </div>
-  
+
+  <div id="quick-replies" class="quick-replies">
+    <button onclick="sendQuickReply('What are your working hours?')">Working Hours</button>
+    <button onclick="sendQuickReply('How can I track my order?')">Track Order</button>
+    <button onclick="sendQuickReply('Can I return my item?')">Return policy</button>
+  </div>
+
   <!-- Chat Toggle Button -->
   <button id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
     💬 Chat with Timex
