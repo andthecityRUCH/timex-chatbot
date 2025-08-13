@@ -2,6 +2,9 @@
 
 ## 1. Initial Setup
 - Created the base chatbot interface in `chatbot.js` (frontend) and `server.cjs` (backend).
+- Used Gemini API for the backend answers for faq, and processing user input and generating neccessary output.
+- Fixed version bugs with the new API key interface and Version updates required in the code. 
+- Fixing npm installation to avoid future complications. 
 - Implemented message bubbles for both user and bot responses.
 - Added typing indicator to simulate natural response timing.
 
